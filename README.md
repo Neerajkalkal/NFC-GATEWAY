@@ -10,18 +10,18 @@ The NFC Gateway is a smart attendance and workplace management system designed t
         Employees tap their NFC-enabled mobile device at an office entry point to mark attendance.
         Secure authentication ensures only registered employees can check in.
         The system records timestamps, employee details, and location data for tracking.
-2. ## Secure Employee Authentication
+2. ### Secure Employee Authentication
         Employees log in using email & password or biometric authentication (Face ID/Fingerprint).
         NFC tokens act as unique employee identifiers, preventing fraud.
-3. ##### Meeting & Schedule Management
+3. ### Meeting & Schedule Management
         Employees receive their meeting schedule after successful login.
         Automated reminders and notifications for upcoming meetings.
         Option to sync with Google Calendar or Outlook.
-4. #### Project-Based Chat System
+4. ### Project-Based Chat System
         Employees can engage in real-time chat with team members.
         Supports file sharing, group discussions, and notifications.
         Admins can create project-specific chat groups.
-5. # Admin Dashboard & Attendance Reports
+5. ### Admin Dashboard & Attendance Reports
         Admins can monitor attendance in real time via a web-based dashboard.
         Export Excel reports for payroll and workforce analysis.
         Manage employee data, assign projects, and set meeting schedules.
