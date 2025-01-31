@@ -1,5 +1,3 @@
-﻿# NFC-GATEWAY
-
 # NFC Gateway: Smart Attendance & Workplace Management System
 # Overview
 
