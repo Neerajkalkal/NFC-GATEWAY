@@ -6,7 +6,7 @@
 The NFC Gateway is a smart attendance and workplace management system designed to enhance office efficiency using Near Field Communication (NFC) technology. Employees can check in and out by simply tapping their NFC-enabled smartphones or NFC cards at designated access points. The system not only records attendance but also provides employees with real-time meeting schedules, project-based chat functionality, and an admin dashboard for monitoring workforce productivity.
 
 # Key Features
-1. NFC-Based Attendance System
+1. NFC-Based Attendance System /n
         Employees tap their NFC-enabled mobile device at an office entry point to mark attendance.
         Secure authentication ensures only registered employees can check in.
         The system records timestamps, employee details, and location data for tracking.
