@@ -6,29 +6,29 @@ The NFC Gateway is a smart attendance and workplace management system designed t
 
 ## Key Features
 1. ### NFC-Based Attendance System 
-        Employees tap their NFC-enabled mobile device at an office entry point to mark attendance.
-        Secure authentication ensures only registered employees can check in.
-        The system records timestamps, employee details, and location data for tracking.
+       * Employees tap their NFC-enabled mobile device at an office entry point to mark attendance.
+       * Secure authentication ensures only registered employees can check in.
+       * The system records timestamps, employee details, and location data for tracking.
 2. ### Secure Employee Authentication
-        Employees log in using email & password or biometric authentication (Face ID/Fingerprint).
-        NFC tokens act as unique employee identifiers, preventing fraud.
+       * Employees log in using email & password or biometric authentication (Face ID/Fingerprint).
+       * NFC tokens act as unique employee identifiers, preventing fraud.
 3. ### Meeting & Schedule Management
-        Employees receive their meeting schedule after successful login.
-        Automated reminders and notifications for upcoming meetings.
-        Option to sync with Google Calendar or Outlook.
+       * Employees receive their meeting schedule after successful login.
+       * Automated reminders and notifications for upcoming meetings.
+       * Option to sync with Google Calendar or Outlook.
 4. ### Project-Based Chat System
-        Employees can engage in real-time chat with team members.
-        Supports file sharing, group discussions, and notifications.
-        Admins can create project-specific chat groups.
+       * Employees can engage in real-time chat with team members.
+       * Supports file sharing, group discussions, and notifications.
+       * Admins can create project-specific chat groups.
 5. ### Admin Dashboard & Attendance Reports
-        Admins can monitor attendance in real time via a web-based dashboard.<br>
-        Export Excel reports for payroll and workforce analysis.
-        Manage employee data, assign projects, and set meeting schedules.
+       * Admins can monitor attendance in real time via a web-based dashboard.
+       * Export Excel reports for payroll and workforce analysis.
+       * Manage employee data, assign projects, and set meeting schedules.
 ## Technology Stack
 
-Frontend (Mobile App): Kotlin (Jetpack Compose), NFC API <br>
-Backend: Spring Boot (Kotlin), MongoDB, JWT Authentication<br>
-Admin Panel: React.js / Angular with Spring Boot APIs <br>
-Reporting: Apache POI for Excel export <br>
+* Frontend (Mobile App): Kotlin (Jetpack Compose), NFC API <br>
+* Backend: Spring Boot (Kotlin), MongoDB, JWT Authentication<br>
+* Admin Panel: React.js / Angular with Spring Boot APIs <br>
+* Reporting: Apache POI for Excel export <br>
 ## Conclusion
 The NFC Gateway provides a seamless, secure, and efficient way to manage attendance, meetings, and team collaboration in an organization. By replacing traditional ID cards with NFC-enabled mobile devices, this system enhances security, reduces administrative workload, and improves employee productivity. 🚀
