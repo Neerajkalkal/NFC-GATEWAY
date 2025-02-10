@@ -1,36 +1,26 @@
 package com.example.nfcgateway.controller
 
-import com.example.nfcgateway.model.employee
-import com.example.nfcgateway.repository.NfcRepository
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import com.example.nfcgateway.dto.NfcRequest
+import com.example.nfcgateway.dto.loginRequest
+import com.example.nfcgateway.repository.EmployeeRepository
+import com.example.nfcgateway.service.employeeService
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/employee")
 class employeeController (
-    private val NfcRepository : NfcRepository
+    private val employeeRepository: EmployeeRepository
 ){
-    @GetMapping
-    fun createEmployee(): String{
-        NfcRepository.save(
-            employee(
-                id = "",
-                nfcId = "",
-                name = "Neeraj",
-                email = "kalkalneeraj",
-                password = "Neeraj@123",
-                role = "developer",
-                department =  "enginer",
-                assignedProjects = emptyList(),
-            )
-        )
-        return "OK"
-    }
+   @PostMapping("/login")
+   fun login(@RequestBody loginRequest: loginRequest): ResponseEntity<String> {
+       val token = employeeRepository.findByEmail(loginRequest.email)
+       return ResponseEntity.ok(token.toString())
+   }
 
-    @GetMapping("/{id}")
-    fun getEmployeeById(@PathVariable employeeId: String) : employee?{
-        return NfcRepository.findById(employeeId).orElse(null)
-    }
+//    @PostMapping("/nfc-login")
+//    fun nfcLogin(@RequestBody nfcRequest: NfcRequest): ResponseEntity<String> {
+//        val token = employeeService.loginWithNfc(nfcRequest)
+//        return ResponseEntity.ok(token.toString())
+//    }
 }
