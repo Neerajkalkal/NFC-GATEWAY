@@ -1,4 +1,4 @@
-package com.example.nfcgateway.util
+package com.example.nfcgateway.service
 
 import com.example.nfcgateway.model.Employee
 import com.example.nfcgateway.repository.EmployeeRepository

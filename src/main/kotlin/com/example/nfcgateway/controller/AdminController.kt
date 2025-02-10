@@ -1,7 +1,7 @@
 package com.example.nfcgateway.controller
 
 import com.example.nfcgateway.model.Employee
-import com.example.nfcgateway.util.AdminService
+import com.example.nfcgateway.service.AdminService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
