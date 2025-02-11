@@ -35,8 +35,8 @@ class SecurityConfig<SecurityFilterChain>(
                     .requestMatchers(
                         "/api/employees/login",
                         "/api/employees/nfc-login",
-                        "/swagger-ui/**",
-                        "/v3/api-docs/**"
+                        "/api/admin/create-employee",
+                        "/api/employees"
                     ).permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
