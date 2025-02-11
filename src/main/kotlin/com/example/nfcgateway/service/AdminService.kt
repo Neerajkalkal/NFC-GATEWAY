@@ -3,7 +3,9 @@ package com.example.nfcgateway.service
 import com.example.nfcgateway.model.Employee
 import com.example.nfcgateway.repository.EmployeeRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.stereotype.Service
 
+@Service
 class AdminService (
     private val employeeRepository: EmployeeRepository
 ) {

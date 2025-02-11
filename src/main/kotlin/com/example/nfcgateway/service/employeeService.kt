@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service
 @Service
 class employeeService(
     private val employeeRepository: EmployeeRepository,
-   @Autowired
    private val jwtService: JWTService
 )
 {
