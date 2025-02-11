@@ -10,7 +10,7 @@ import java.util.*
 @Service
 class JWTService {
     private val  secret = System.getenv("SECRET") ?: "mysecretpassword"
-    private val key = Keys.hmacShaKeyFor(secretKey)
+    private val key = Keys.hmacShaKeyFor(secret.toByteArray())
 
     fun generateToken(email: String): String {
         return Jwts.builder()
