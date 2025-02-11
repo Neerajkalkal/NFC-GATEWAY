@@ -20,7 +20,7 @@ class employeeService(
     private val passwordEncoder = BCryptPasswordEncoder()
 
     // Register Employee (Admin Functionality)
-    fun reqisterEmployee( val employee: Employee) {
+    fun reqisterEmployee(employee: Employee) {
             employee.password = passwordEncoder.encode(employee.password)
             employeeRepository.save(employee)
     }
@@ -28,7 +28,7 @@ class employeeService(
     // Login with Email/Password
     fun login(loginRequest: loginRequest): String{
         val employee = employeeRepository.findByEmail(loginRequest.email)
-            ?: throw EmployeeNotFoundException("Employee not found")
+            ?: throw Exception("Employee not found")
         if (!passwordEncoder.matches(loginRequest.password, employee.password)) {
             throw InvalidCredentialsException("Invalid credentials")
         }
@@ -38,7 +38,7 @@ class employeeService(
     // Login with NFC
     fun loginWithNfc(nfcRequest: NfcRequest): String {
         val employee = employeeRepository.findByPhoneNfcId(nfcRequest.phoneNfcId)
-            ?: throw EmployeeNotFoundException("Invalid NFC ID")
+            ?: throw Exception("Invalid NFC ID")
         return jwtService.generateToken(employee.email)
     }
 
