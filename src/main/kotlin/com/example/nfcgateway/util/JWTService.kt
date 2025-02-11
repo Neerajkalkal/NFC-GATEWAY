@@ -44,6 +44,9 @@ class JWTService(
             .body
     }
 
+    fun extractUsername(token: String): String {
+        return extractClaims(token).subject
+    }
     private fun isTokenExpired(token: String): Boolean {
         return extractClaims(token).expiration.before(Date())
     }
