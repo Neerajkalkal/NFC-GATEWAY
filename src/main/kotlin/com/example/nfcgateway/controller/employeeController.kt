@@ -2,6 +2,7 @@ package com.example.nfcgateway.controller
 
 import com.example.nfcgateway.dto.NfcRequest
 import com.example.nfcgateway.dto.loginRequest
+import com.example.nfcgateway.model.Employee
 import com.example.nfcgateway.repository.EmployeeRepository
 import com.example.nfcgateway.service.employeeService
 import org.springframework.http.ResponseEntity
@@ -17,6 +18,16 @@ class employeeController (
        val token = employeeRepository.findByEmail(loginRequest.email)
        return ResponseEntity.ok(token.toString())
    }
+
+    // Update employee details
+//    @PutMapping("/{employeeId}")
+//    fun updateEmployee(
+//        @PathVariable employeeId: String,
+//        @RequestBody updatedEmployee: Employee
+//    ): ResponseEntity<Employee> {
+//        val employee = employeeService.updateEmployee(employeeId, updatedEmployee)
+//        return ResponseEntity.ok(employee)
+//    }
 
 //    @PostMapping("/nfc-login")
 //    fun nfcLogin(@RequestBody nfcRequest: NfcRequest): ResponseEntity<String> {

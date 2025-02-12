@@ -15,7 +15,6 @@ class JWTService(
     private val jwtConfig: JwtConfig,
 ) {
     private val secretKey: SecretKey = Keys.hmacShaKeyFor(jwtConfig.secretKey.toByteArray())
-//    private val key = Keys.hmacShaKeyFor(secretKey.toByteArray(Charsets.UTF_8))
 
     fun generateToken(userDetails: UserDetails): String {
         return Jwts.builder()

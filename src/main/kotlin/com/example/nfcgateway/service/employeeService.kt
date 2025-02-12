@@ -1,12 +1,9 @@
 package com.example.nfcgateway.service
 
-import com.example.nfcgateway.dto.NfcRequest
-import com.example.nfcgateway.dto.loginRequest
 import com.example.nfcgateway.model.Employee
 import com.example.nfcgateway.repository.EmployeeRepository
 import com.example.nfcgateway.util.JWTService
 import org.apache.http.auth.InvalidCredentialsException
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
@@ -23,7 +20,6 @@ class employeeService(
 ) : UserDetailsService {
     private val passwordEncoder = BCryptPasswordEncoder()
 
-    @Override
     override fun loadUserByUsername(email: String): UserDetails{
         val employee = employeeRepository.findByEmail(email)
             ?: throw UsernameNotFoundException("Employee not found with email: $email")
@@ -37,9 +33,9 @@ class employeeService(
     }
 
     // Register Employee (Admin Functionality)
-    fun reqisterEmployee(  employee: Employee) {
+    fun reqisterEmployee(  employee: Employee): Employee {
             employee.password = passwordEncoder.encode(employee.password)
-            employeeRepository.save(employee)
+          return  employeeRepository.save(employee)
     }
 
     // Login with Email/Password
@@ -78,18 +74,18 @@ class employeeService(
     }
 
     // Get employee by ID
-    fun getEmployeeById(id: String): Employee {
-        return employeeRepository.findById(id)
+    fun getEmployeeById(employeeId: String): Employee {
+        return employeeRepository.findById(employeeId)
             .orElseThrow {
-                Exception("Employee not found with ID: $id")
+                Exception("Employee not found with ID: $employeeId")
             }
     }
 
     // Update employee details
-    fun updateEmployee(id: String, updatedEmployee: Employee): Employee {
-        val existingEmployee = employeeRepository.findById(id)
+    fun updateEmployee(employeeId: String, updatedEmployee: Employee): Employee {
+        val existingEmployee = employeeRepository.findById(employeeId)
             .orElseThrow {
-                Exception("Employee not found with ID: $id")
+                Exception("Employee not found with ID: $employeeId")
             }
 
         // Update fields
@@ -103,11 +99,11 @@ class employeeService(
     }
 
     // Delete employee by ID
-    fun deleteEmployee(id: String) {
-        if (!employeeRepository.existsById(id)) {
-            throw Exception("Employee not found with ID: $id")
+    fun deleteEmployee(employeeId: String) {
+        if (!employeeRepository.existsById(employeeId)) {
+            throw Exception("Employee not found with ID: $employeeId")
         }
-        employeeRepository.deleteById(id)
+        employeeRepository.deleteById(employeeId)
     }
 
 }
