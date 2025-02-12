@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/employee")
 class employeeController (
-    private val employeeRepository: EmployeeRepository
+   private val employeeService: employeeService
 ){
    @PostMapping("/login")
    fun login(@RequestBody loginRequest: loginRequest): ResponseEntity<String> {
-       val token = employeeRepository.findByEmail(loginRequest.email)
-       return ResponseEntity.ok(token.toString())
+       val token = employeeService.login(loginRequest)
+       return ResponseEntity.ok(token)
    }
 
     // Update employee details

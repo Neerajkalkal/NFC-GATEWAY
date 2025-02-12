@@ -1,5 +1,6 @@
 package com.example.nfcgateway.service
 
+import com.example.nfcgateway.dto.loginRequest
 import com.example.nfcgateway.model.Employee
 import com.example.nfcgateway.repository.EmployeeRepository
 import com.example.nfcgateway.util.JWTService
@@ -39,14 +40,14 @@ class employeeService(
     }
 
     // Login with Email/Password
-    fun login(email: String,password : String): String{
-        val employee = employeeRepository.findByEmail(email)
+    fun login(loginRequest: loginRequest): String{
+        val employee = employeeRepository.findByEmail(loginRequest.email)
             ?: throw Exception("Employee not found")
-        if (!passwordEncoder.matches(password, employee.password)) {
+        if (!passwordEncoder.matches(loginRequest.password, employee.password)) {
             throw InvalidCredentialsException("Invalid credentials")
         }
         return jwtService.generateToken(
-            User(employee.email, employee.password, getAuthorities(employee.isAdmin))
+            loadUserByUsername(employee.email)
         )
     }
 

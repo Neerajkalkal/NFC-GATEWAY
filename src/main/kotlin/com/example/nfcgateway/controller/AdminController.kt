@@ -12,9 +12,9 @@ class AdminController (
 )
 {
     @PostMapping("/create-employee")
-    fun createEmployee(@RequestBody employee: Employee): ResponseEntity<String> {
-        adminService.createEmployee(employee)
-        return ResponseEntity.ok("Employee created successfully")
+    fun createEmployee(@RequestBody employee: Employee): ResponseEntity<Employee> {
+      val createdEmployee =  adminService.createEmployee(employee)
+        return ResponseEntity.ok(createdEmployee)
     }
 
     @GetMapping("/employees")

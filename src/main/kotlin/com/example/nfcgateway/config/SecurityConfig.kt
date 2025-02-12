@@ -33,6 +33,7 @@ class SecurityConfig<SecurityFilterChain>(
             .authorizeHttpRequests { requests ->
                 requests
                     .requestMatchers(
+                        "/api/employee",
                         "/api/employees/login",
                         "/api/employees/nfc-login",
                         "/api/admin/create-employee",
