@@ -34,10 +34,10 @@ class SecurityConfig<SecurityFilterChain>(
                 requests
                     .requestMatchers(
                         "/api/employee",
-                        "/api/employees/login",
-                        "/api/employees/nfc-login",
+                        "/api/employee/login",
+                        "/api/employee/nfc-login",
                         "/api/admin/create-employee",
-                        "/api/employees"
+                        "/api/employee"
                     ).permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
