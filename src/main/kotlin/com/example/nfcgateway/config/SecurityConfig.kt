@@ -36,8 +36,7 @@ class SecurityConfig<SecurityFilterChain>(
                         "/api/employee",
                         "/api/employee/login",
                         "/api/employee/nfc-login",
-                        "/api/admin/create-employee",
-                        "/api/employee"
+                        "/api/admin/create-employee"
                     ).permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
