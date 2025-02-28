@@ -21,11 +21,15 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.security:spring-security-config")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-mail")
+	implementation("com.sun.mail:jakarta.mail:2.0.1")
+
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -39,10 +43,10 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
-	//firebase
-	implementation("com.google.firebase:firebase-admin:9.2.0")
-	implementation("com.squareup.okhttp3:okhttp:4.10.0") // For HTTP requests
-	implementation("com.auth0:java-jwt:3.18.2")
+//	//firebase
+//	implementation("com.google.firebase:firebase-admin:9.2.0")
+//	implementation("com.squareup.okhttp3:okhttp:4.10.0") // For HTTP requests
+//	implementation("com.auth0:java-jwt:3.18.2")
 }
 
 kotlin {

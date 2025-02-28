@@ -7,12 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Employee(
     @Id
     val id: String? = null,
-    val phoneNfcId: String, // NFC ID from the employee's phone
+    var phoneNfcId: String?, // NFC ID from the employee's phone
     var name: String,
     var email: String,
     var password: String, // hased passsword
     val employeeId: String,// Unique employee ID
-    val role: String = "EMPLOYEE",
     var department: String,
     var assignedProjects: List<String>, // List of assigned projects
     val isAdmin: Boolean = false // To differentiate between admin and employee

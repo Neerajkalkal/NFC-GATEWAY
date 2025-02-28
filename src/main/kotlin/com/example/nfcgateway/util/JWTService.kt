@@ -1,6 +1,7 @@
 package com.example.nfcgateway.util
 
 import com.example.nfcgateway.config.JwtConfig
+import com.example.nfcgateway.model.Employee
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -16,19 +17,40 @@ class JWTService(
 ) {
     private val secretKey: SecretKey = Keys.hmacShaKeyFor(jwtConfig.secretKey.toByteArray())
 
-    fun generateToken(userDetails: UserDetails): String {
+    fun generateToken(employee: Employee): String {
         return Jwts.builder()
-            .setSubject(userDetails.username)
-            .claim("roles", userDetails.authorities)
+            .setSubject(employee.email)
+            .claim("roles", listOf(if (employee.isAdmin) "ROLE_ADMIN" else "ROLE_EMPLOYEE"))
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + jwtConfig.expirationsMs))
+            .setExpiration(Date(System.currentTimeMillis() + jwtConfig.expirationMs))
             .signWith(secretKey, SignatureAlgorithm.HS512)
             .compact()
     }
 
-    fun extractToken(token:String): String {
-        return extractClaims(token).subject
+    fun extractUsername(token: String): String {
+        return Jwts.parserBuilder()
+            .setSigningKey(secretKey)
+            .build()
+            .parseClaimsJws(token)
+            .body
+            .subject
     }
+
+    fun validateToken(token: String): Boolean {
+        return try {
+            Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+            true
+        }catch (e:Exception){
+            false
+        }
+    }
+
+//    fun extractToken(token:String): String {
+//        return extractClaims(token).subject
+//    }
 
     fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
         val username = extractUsername(token)
@@ -43,9 +65,9 @@ class JWTService(
             .body
     }
 
-    fun extractUsername(token: String): String {
-        return extractClaims(token).subject
-    }
+//    fun extractUsername(token: String): String {
+//        return extractClaims(token).subject
+//    }
     private fun isTokenExpired(token: String): Boolean {
         return extractClaims(token).expiration.before(Date())
     }

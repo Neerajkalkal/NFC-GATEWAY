@@ -1,6 +1,6 @@
 package com.example.nfcgateway.config
 
-import com.example.nfcgateway.service.employeeService
+import com.example.nfcgateway.service.EmployeeService
 import com.example.nfcgateway.util.JWTService
 import com.example.nfcgateway.util.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
@@ -8,37 +8,39 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.DefaultSecurityFilterChain
+import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig<SecurityFilterChain>(
-    private val employeeService: employeeService,
+class SecurityConfig(
+    private val employeeService: EmployeeService,
     private val jwtService: JWTService,
 ) {
+
     @Bean
-    fun securityFilterChain(http: HttpSecurity): DefaultSecurityFilterChain? {
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .csrf { it.disable() }
-            .cors { it.disable() }
+//            .cors { it.disable() }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .authorizeHttpRequests { requests ->
                 requests
                     .requestMatchers(
-                        "/api/employee",
+                        "/api/employee/change-password",
                         "/api/employee/login",
-                        "/api/employee/nfc-login",
-                        "/api/admin/create-employee"
+                        "/api/employee/nfc-login"
                     ).permitAll()
-                    .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/api/admin/**"
+                    ).hasAuthority("ROLE_ADMIN")
                     .anyRequest().authenticated()
             }
             .addFilterBefore(
@@ -52,6 +54,15 @@ class SecurityConfig<SecurityFilterChain>(
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
+
+//    @Bean
+//    fun authenticationManager(http: HttpSecurity, authenticationManagerBuilder: AuthenticationManagerBuilder): AuthenticationManager? {
+//        return http.getSharedObject(AuthenticationManagerBuilder::class.java)
+//            .userDetailsService(employeeService)
+//            .passwordEncoder(passwordEncoder())
+//            .and()
+//            .build()
+//    }
 
     @Bean
     fun authenticationManager(): AuthenticationManager {
