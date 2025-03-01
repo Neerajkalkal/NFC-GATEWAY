@@ -9,14 +9,17 @@ import org.springframework.stereotype.Service
 @Service
 class AdminService(
     private val employeeRepository: EmployeeRepository,
-    private val emailService: EmailService
+    private val emailService: EmailService,
+    private val passwordService : PasswordService
 ) {
     private val passwordEncoder = BCryptPasswordEncoder()
 
     // Create Employee (Admin Functionality)
     fun createEmployee(request: CreateEmployeeRequest ) : Employee {
+
+        val tempPassword = passwordService.generatePassword()
         // Hash the password before saving
-        val hashedPassword = passwordEncoder.encode(request.password)
+        val hashedPassword = passwordEncoder.encode(tempPassword)
         val employee = Employee(
             employeeId = request.employeeId,
             name = request.name,
@@ -27,10 +30,16 @@ class AdminService(
             assignedProjects = request.assignedProjects,
             isAdmin = request.isAdmin
         )
-        employeeRepository.save(employee)
+       val savedEmployee= employeeRepository.save(employee)
+    try {
+        emailService.sendCredentialsEmail(request.email, tempPassword)
+    }catch (ex: Exception){
+        // Rollback employee creation if email fails
+        employeeRepository.delete(savedEmployee)
+        throw RuntimeException("Employee creation failed: ${ex.message}")
+    }
 
-        emailService.sendCredentialsEmail(request.email, request.password)
-        return employee
+        return savedEmployee
     }
 
     // Get All Employees (Admin Functionality)

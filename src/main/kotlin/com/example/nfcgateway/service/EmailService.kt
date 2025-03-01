@@ -13,10 +13,8 @@ class EmailService(private val mailSender: JavaMailSender) {
             subject = "Your NFC Gateway Account Credentials"
             text = """
                 Your account has been created!
-                Username: $toEmail
+                Email: $toEmail
                 Password: $password
-                
-                Login here: http://your-nfc-gateway-url/login
             """.trimIndent()
         }
         try {
