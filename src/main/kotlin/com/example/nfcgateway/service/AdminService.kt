@@ -1,8 +1,8 @@
 package com.example.nfcgateway.service
 
-import com.example.nfcgateway.Global_Exception.DuplicateEmailException
-import com.example.nfcgateway.Global_Exception.EmailSendException
-import com.example.nfcgateway.Global_Exception.InvalidEmailFormatException
+import com.example.nfcgateway.Exception.DuplicateEmailException
+import com.example.nfcgateway.Exception.EmailSendException
+import com.example.nfcgateway.Exception.InvalidEmailFormatException
 import com.example.nfcgateway.dto.CreateEmployeeRequest
 import com.example.nfcgateway.model.Employee
 import com.example.nfcgateway.repository.EmployeeRepository
@@ -24,7 +24,6 @@ class AdminService(
     // Create Employee (Admin Functionality)
     fun createEmployee(request: CreateEmployeeRequest ) : Employee {
 
-
         // Validate email format
         if (!isValidEmail(request.email)) {
             throw InvalidEmailFormatException("Invalid email address format")
@@ -34,7 +33,6 @@ class AdminService(
         if (employeeRepository.existsByEmail(request.email)) {
             throw DuplicateEmailException("Email already exists")
         }
-
 
         val employeeId = idGenerator.generateNextEmployeeId()
         val tempPassword = passwordService.generatePassword()
@@ -50,7 +48,9 @@ class AdminService(
             assignedProjects = request.assignedProjects,
             isAdmin = request.isAdmin
         )
+
        val savedEmployee= employeeRepository.save(employee)
+
     try {
         emailService.sendCredentialsEmail(request.email,tempPassword , employeeId)
     }catch (ex: Exception){
