@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.index.IndexOptions.Unique
 import org.springframework.stereotype.Indexed
 
 data class CreateEmployeeRequest(
-    val employeeId: String,
+//    val employeeId: String,
     val name: String,
     val email: String,
     val phoneNfcId: String,

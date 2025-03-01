@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class EmailService(private val mailSender: JavaMailSender) {
 
-    fun sendCredentialsEmail(toEmail: String, password: String) {
+    fun sendCredentialsEmail(toEmail: String, password: String, employeeId: String) {
         val message = SimpleMailMessage().apply {
             setTo(toEmail)
             subject = "Your NFC Gateway Account Credentials"
@@ -15,6 +15,7 @@ class EmailService(private val mailSender: JavaMailSender) {
                 Your account has been created!
                 Email: $toEmail
                 Password: $password
+                EmployeeId: $employeeId
             """.trimIndent()
         }
         try {

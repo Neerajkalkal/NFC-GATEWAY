@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface EmployeeRepository : MongoRepository<Employee , String>{
+    fun existsByEmail(email: String): Boolean
     fun findByEmployeeId(employeeId: String): Employee?
     fun findByEmail(email: String) : Employee?
     fun findByPhoneNfcId(phoneNfcId: String) : Employee?

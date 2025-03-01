@@ -26,11 +26,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("com.sun.mail:jakarta.mail:2.0.1")
 	implementation("org.apache.commons:commons-text:1.11.0")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
-	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

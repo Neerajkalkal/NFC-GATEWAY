@@ -3,6 +3,7 @@ package com.example.nfcgateway.model
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
 
 @Document(collection = "employee")
 data class Employee(
@@ -10,6 +11,7 @@ data class Employee(
     val id: String? = null,
     var phoneNfcId: String?, // NFC ID from the employee's phone
     var name: String,
+    @Field("email")
     var email: String,
     var password: String, // hased passsword
     @Indexed(unique = true)
