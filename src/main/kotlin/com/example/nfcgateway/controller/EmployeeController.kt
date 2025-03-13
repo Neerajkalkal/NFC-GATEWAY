@@ -3,16 +3,20 @@ package com.example.nfcgateway.controller
 import com.example.nfcgateway.dto.NfcRequest
 import com.example.nfcgateway.dto.changePasswordRequest
 import com.example.nfcgateway.dto.loginRequest
+import com.example.nfcgateway.repository.EmployeeRepository
 import com.example.nfcgateway.service.EmployeeService
+import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("/api/employee")
-class employeeController (
-   private val employeeService: EmployeeService
+class EmployeeController(
+    private val employeeService: EmployeeService,
+    private val employeeRepository: EmployeeRepository
 ){
-   @PostMapping("/login")
+    @PostMapping("/login")
    fun login(@RequestBody loginRequest: loginRequest): ResponseEntity<String> {
        val token = employeeService.login(loginRequest)
        return ResponseEntity.ok(token)
@@ -35,4 +39,5 @@ class employeeController (
         val message = employeeService.changePassword(email, request)
         return ResponseEntity.ok(message)
     }
+
 }

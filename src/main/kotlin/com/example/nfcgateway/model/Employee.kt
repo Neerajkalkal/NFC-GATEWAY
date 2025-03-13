@@ -17,6 +17,7 @@ data class Employee(
     @Indexed(unique = true)
     val employeeId: String,// Unique employee ID
     var department: String,
+    val roles: List<String> = listOf("USER"),
     var assignedProjects: List<String>, // List of assigned projects
     val isAdmin: Boolean = false // To differentiate between admin and employee
 )

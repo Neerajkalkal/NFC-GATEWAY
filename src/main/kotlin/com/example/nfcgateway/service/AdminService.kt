@@ -52,7 +52,7 @@ class AdminService(
        val savedEmployee= employeeRepository.save(employee)
 
     try {
-        emailService.sendCredentialsEmail(request.email,tempPassword , employeeId)
+        emailService.sendCredentialsEmail(request.email,tempPassword , employeeId , request.name)
     }catch (ex: Exception){
         // Rollback employee creation if email fails
         employeeRepository.delete(savedEmployee)
