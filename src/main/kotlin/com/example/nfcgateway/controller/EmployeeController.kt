@@ -5,6 +5,7 @@ import com.example.nfcgateway.dto.changePasswordRequest
 import com.example.nfcgateway.dto.loginRequest
 import com.example.nfcgateway.repository.EmployeeRepository
 import com.example.nfcgateway.service.EmployeeService
+import com.sun.activation.registries.LogSupport.log
 import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -18,8 +19,9 @@ class EmployeeController(
 ){
     @PostMapping("/login")
    fun login(@RequestBody loginRequest: loginRequest): ResponseEntity<String> {
+       println(loginRequest)
        val token = employeeService.login(loginRequest)
-       return ResponseEntity.ok(token)
+        return ResponseEntity.ok(token)
    }
 
     // login with nfc
