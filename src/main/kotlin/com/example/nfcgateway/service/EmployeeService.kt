@@ -1,5 +1,6 @@
 package com.example.nfcgateway.service
 
+import com.example.nfcgateway.dto.EmployeeDto
 import com.example.nfcgateway.dto.changePasswordRequest
 import com.example.nfcgateway.dto.loginRequest
 import com.example.nfcgateway.model.Employee
@@ -20,26 +21,28 @@ class EmployeeService(
 ) : UserDetailsService {
     private val passwordEncoder = BCryptPasswordEncoder()
 
-    override fun loadUserByUsername(email: String): UserDetails{
+    override fun loadUserByUsername(email: String): UserDetails {
         val employee = employeeRepository.findByEmail(email)
             ?: throw UsernameNotFoundException("Employee not found with email: $email")
         return User(
             employee.email,
             employee.password,
-            listOf(SimpleGrantedAuthority(
-                if (employee.isAdmin) "ROLE_ADMIN" else "ROLE_EMPLOYEE"
+            listOf(
+                SimpleGrantedAuthority(
+                    if (employee.isAdmin) "ROLE_ADMIN" else "ROLE_EMPLOYEE"
+                )
             )
-        ))
+        )
     }
 
     // Register Employee (Admin Functionality)
-    fun registerEmployee(  employee: Employee): Employee {
-            employee.password = passwordEncoder.encode(employee.password)
-          return  employeeRepository.save(employee)
+    fun registerEmployee(employee: Employee): Employee {
+        employee.password = passwordEncoder.encode(employee.password)
+        return employeeRepository.save(employee)
     }
 
     // Login with Email/Password
-    fun login(loginRequest: loginRequest): String{
+    fun login(loginRequest: loginRequest): String {
         val employee = employeeRepository.findByEmail(loginRequest.email)
             ?: throw Exception("Employee not found")
         if (!passwordEncoder.matches(loginRequest.password, employee.password)) {
@@ -49,16 +52,16 @@ class EmployeeService(
     }
 
     // Login with NFC
-    fun loginWithNfc(phoneNfcId : String): String {
+    fun loginWithNfc(phoneNfcId: String): String {
         val employee = employeeRepository.findByPhoneNfcId(phoneNfcId)
             ?: throw Exception("Invalid NFC ID")
         return jwtService.generateToken(employee)
     }
 
     // change password
-    fun changePassword(email: String, request: changePasswordRequest): String{
+    fun changePassword(email: String, request: changePasswordRequest): String {
         val employee = employeeRepository.findByEmail(email)
-            ?:throw Exception("Employee not found")
+            ?: throw Exception("Employee not found")
         if (!passwordEncoder.matches(request.oldPassword, employee.password)) {
             throw Exception("Old password is incorrect")
         }
@@ -67,7 +70,14 @@ class EmployeeService(
         return "Password changed successfully!"
     }
 
-
-
-
+    fun getEmployeeByEmployeeId(email: String): EmployeeDto {
+        val employee = employeeRepository.findByEmail(email)
+            ?: throw RuntimeException("Employee not found")
+        return EmployeeDto(
+            employee.name,
+            employee.department,
+            employee.employeeId,
+            employee.email
+        )
+    }
 }

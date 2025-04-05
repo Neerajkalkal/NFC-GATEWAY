@@ -37,7 +37,8 @@ class SecurityConfig(
                     .requestMatchers(
                         "/api/employee/change-password",
                         "/api/employee/login",
-                        "/api/employee/nfc-login"
+                        "/api/employee/nfc-login",
+                        "/api/employee/{email}",
                     ).permitAll()
                     .requestMatchers("/api/admin/**"
                     ).hasAuthority("ROLE_ADMIN")

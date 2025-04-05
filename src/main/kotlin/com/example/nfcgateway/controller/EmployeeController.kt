@@ -1,15 +1,10 @@
 package com.example.nfcgateway.controller
 
-import com.example.nfcgateway.dto.NfcRequest
-import com.example.nfcgateway.dto.changePasswordRequest
-import com.example.nfcgateway.dto.loginRequest
+import com.example.nfcgateway.dto.*
 import com.example.nfcgateway.repository.EmployeeRepository
 import com.example.nfcgateway.service.EmployeeService
-import com.sun.activation.registries.LogSupport.log
-import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.security.Principal
 
 @RestController
 @RequestMapping("/api/employee")
@@ -18,12 +13,11 @@ class EmployeeController(
     private val employeeRepository: EmployeeRepository
 ){
     @PostMapping("/login")
-   fun login(@RequestBody loginRequest: loginRequest): ResponseEntity<String> {
-       println(loginRequest)
-       val token = employeeService.login(loginRequest)
+    fun login(@RequestBody loginRequest: loginRequest): ResponseEntity<String> {
+        println(loginRequest)
+        val token = employeeService.login(loginRequest)
         return ResponseEntity.ok(token)
-   }
-
+    }
     // login with nfc
     @PostMapping("/nfc-login")
     fun nfcLogin(@RequestBody nfcRequest: NfcRequest): ResponseEntity<String> {
@@ -41,5 +35,12 @@ class EmployeeController(
         val message = employeeService.changePassword(email, request)
         return ResponseEntity.ok(message)
     }
+
+    @GetMapping("/{email}")
+    fun getEmployeeByEmployeeId(@PathVariable email: String): ResponseEntity<EmployeeDto> {
+        val employee = employeeService.getEmployeeByEmployeeId(email)
+        return ResponseEntity.ok(employee)
+    }
+
 
 }
