@@ -18,12 +18,12 @@ class EmployeeController(
         val token = employeeService.login(loginRequest)
         return ResponseEntity.ok(token)
     }
-    // login with nfc
-    @PostMapping("/nfc-login")
-    fun nfcLogin(@RequestBody nfcRequest: NfcRequest): ResponseEntity<String> {
-        val token = employeeService.loginWithNfc(nfcRequest.toString())
-        return ResponseEntity.ok(token)
-    }
+//    // login with nfc
+//    @PostMapping("/nfc-login")
+//    fun nfcLogin(@RequestBody nfcRequest: NfcRequest): ResponseEntity<String> {
+//        val token = employeeService.loginWithNfc(nfcRequest.toString())
+//        return ResponseEntity.ok(token)
+//    }
 
     // change password
     @PostMapping("/change-password")

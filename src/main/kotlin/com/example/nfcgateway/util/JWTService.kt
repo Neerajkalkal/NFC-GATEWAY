@@ -20,7 +20,9 @@ class JWTService(
     fun generateToken(employee: Employee): String {
         return Jwts.builder()
             .setSubject(employee.email)
-            .claim("roles", listOf(if (employee.isAdmin) "ROLE_ADMIN" else "ROLE_EMPLOYEE"))
+            .claim("roles", listOf(if (employee.isAdmin) "ROLE_ADMIN" else "ROLE_EMPLOYEE"),)
+            .claim("email", employee.email)
+            .claim("name", employee.name)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtConfig.expirationMs))
             .signWith(secretKey, SignatureAlgorithm.HS512)

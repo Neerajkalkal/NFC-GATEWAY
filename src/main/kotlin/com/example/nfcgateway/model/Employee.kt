@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 data class Employee(
     @Id
     val id: String? = null,
-    var phoneNfcId: String?, // NFC ID from the employee's phone
+//    var phoneNfcId: String?, // NFC ID from the employee's phone
     var name: String,
     @Field("email")
     var email: String,

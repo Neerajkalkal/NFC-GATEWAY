@@ -51,12 +51,12 @@ class EmployeeService(
         return jwtService.generateToken(employee)
     }
 
-    // Login with NFC
-    fun loginWithNfc(phoneNfcId: String): String {
-        val employee = employeeRepository.findByPhoneNfcId(phoneNfcId)
-            ?: throw Exception("Invalid NFC ID")
-        return jwtService.generateToken(employee)
-    }
+//    // Login with NFC
+//    fun loginWithNfc(phoneNfcId: String): String {
+//        val employee = employeeRepository.findByPhoneNfcId(phoneNfcId)
+//            ?: throw Exception("Invalid NFC ID")
+//        return jwtService.generateToken(employee)
+//    }
 
     // change password
     fun changePassword(email: String, request: changePasswordRequest): String {

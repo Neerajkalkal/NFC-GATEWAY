@@ -43,10 +43,10 @@ class AdminService(
             name = request.name,
             email = request.email,
             password = hashedPassword,
-            phoneNfcId = request.phoneNfcId,
+//            phoneNfcId = request.phoneNfcId,
             department = request.department,
             assignedProjects = request.assignedProjects,
-            isAdmin = request.isAdmin
+            isAdmin = request.isAdmin,
         )
 
        val savedEmployee= employeeRepository.save(employee)
